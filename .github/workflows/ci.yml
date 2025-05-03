@@ -65,7 +65,7 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v5.1.0
         with:
           args: >
-            -Dsonar.projectKey=suesarabi
+            -Dsonar.projectKey=SueSarabi_Mars-Rover
             -Dsonar.organization=SueSarabi
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
         env:
