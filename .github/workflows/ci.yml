@@ -20,7 +20,7 @@ jobs:
           java-version: 17
 
       - name: Run ktlint via Maven
-        run: mvn com.github.psxpaul:ktlint-maven-plugin:1.16.0:check
+        run: mvn com.github.gantsign.maven:ktlint-maven-plugin:3.5.0:check
 
   build:
     runs-on: ubuntu-latest
