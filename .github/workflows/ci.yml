@@ -10,36 +10,32 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run ktlint
-        uses: ScaCap/action-ktlint@master
-        with:
-          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
-          level: error
-          reporter: github-pr-check
-          filter_mode: added
-          fail_on_error: false
-          relative: true
-          android: false
-          ktlint_version: latest
-          name: ktlint
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Setup JDK
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: 17
-      - name: Build
-        run: ./gradlew build
+
+      - name: Run ktlint via Maven
+        run: mvn com.github.psxpaul:ktlint-maven-plugin:1.16.0:check
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Build with Maven
+        run: mvn -B clean verify
 
   test:
     runs-on: ubuntu-latest
@@ -48,21 +44,22 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Setup JDK
+
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: 17
-      - name: Test
-        run: ./gradlew test
+
+      - name: Run Tests with Maven
+        run: mvn test
+
 
   code-quality:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5.1.0
@@ -70,8 +67,8 @@ jobs:
           args: >
             -Dsonar.projectKey=suesarabi
             -Dsonar.organization=SueSarabi
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
 
