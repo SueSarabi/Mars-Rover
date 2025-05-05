@@ -38,6 +38,7 @@ class Rover {
 class RoverState {
     var position: Position = Position(0, 0)
     var direction: Direction = Direction.N
+
     fun moveForward() {
         position = position.roverMovement(direction)
     }
