@@ -2,39 +2,27 @@ package org.example
 
 class Rover {
     constructor(p: String) {
-        val s = p.split(' ')
-        if (s.size >= 3) {
-            rs.xx = s[0].toInt()
-            rs.yy = s[1].toInt()
-            rs.dd = s[2][0]
+        val parts = p.split(' ')
+        if (parts.size >= 3) {
+            state.xx = parts[0].toInt()
+            state.yy = parts[1].toInt()
+            state.dd = Direction.valueOf(parts[2])
         }
     }
 
-    fun go(cms: String) {
-        for (c in cms) {
-            when (c) {
-                'L' ->
-                    when (rs.dd) {
-                        'E' -> rs.dd = 'N'
-                        'N' -> rs.dd = 'W'
-                        'W' -> rs.dd = 'S'
-                        'S' -> rs.dd = 'E'
-                    }
+    fun go(commands: String) {
+        for (command in commands) {
+            when (command) {
+                'L' -> state.dd = state.dd.left()
 
-                'R' ->
-                    when (rs.dd) {
-                        'E' -> rs.dd = 'S'
-                        'S' -> rs.dd = 'W'
-                        'W' -> rs.dd = 'N'
-                        'N' -> rs.dd = 'E'
-                    }
+                'R' -> state.dd = state.dd.right()
 
                 'M' ->
-                    when (rs.dd) {
-                        'E' -> rs.xx++
-                        'S' -> rs.yy--
-                        'W' -> rs.xx--
-                        'N' -> rs.yy++
+                    when (state.dd) {
+                        Direction.E -> state.xx++
+                        Direction.S -> state.yy--
+                        Direction.W -> state.xx--
+                        Direction.N -> state.yy++
                     }
             }
         }
@@ -45,17 +33,17 @@ class Rover {
     }
 
     val xyd: String
-        get() = "${rs.xx} ${rs.yy} ${rs.dd}"
+        get() = "${state.xx} ${state.yy} ${state.dd}"
 
     fun pos(): String = xyd
 
     constructor() : this("")
 
-    private var rs = RoverState()
+    private var state = RoverState()
 }
 
 class RoverState {
     var xx: Int = 0
     var yy: Int = 0
-    var dd: Char = 'N'
+    var dd: Direction = Direction.N
 }
