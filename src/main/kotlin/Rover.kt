@@ -4,20 +4,21 @@ class Rover {
     constructor(p: String) {
         val parts = p.split(' ')
         if (parts.size >= 3) {
-            state.xx = parts[0].toInt()
-            state.yy = parts[1].toInt()
-            state.dd = Direction.valueOf(parts[2])
+            val x = parts[0].toInt()
+            val y = parts[1].toInt()
+            state.position = Position(x, y)
+            state.direction = Direction.valueOf(parts[2])
         }
     }
 
     fun go(commands: String) {
         for (command in commands) {
             when (command) {
-                'L' -> state.dd = state.dd.left()
+                'L' -> state.direction = state.direction.left()
 
-                'R' -> state.dd = state.dd.right()
+                'R' -> state.direction = state.direction.right()
 
-                'M' -> state.roverMovement()
+                'M' -> state.moveForward()
             }
         }
     }
@@ -26,26 +27,21 @@ class Rover {
         go(z.toString())
     }
 
-    val xyd: String
-        get() = "${state.xx} ${state.yy} ${state.dd}"
+    val positionString: String
+        get() = "${state.position} ${state.direction}"
 
-    fun pos(): String = xyd
+    fun pos(): String = positionString
 
     constructor() : this("")
 
     private var state = RoverState()
 }
 
+
 class RoverState {
-    fun roverMovement(){
-        when (dd) {
-            Direction.E -> xx++
-            Direction.S -> yy--
-            Direction.W -> xx--
-            Direction.N -> yy++
-        }
+    var position: Position = Position(0, 0)
+    var direction: Direction = Direction.N
+    fun moveForward() {
+        position = position.roverMovement(direction)
     }
-    var xx: Int = 0
-    var yy: Int = 0
-    var dd: Direction = Direction.N
 }
