@@ -32,8 +32,6 @@ class Rover {
 
     fun showPosition(): String = positionString
 
-    constructor() : this("")
-
     private var state = RoverState()
 }
 
