@@ -30,7 +30,7 @@ class Rover {
     val positionString: String
         get() = "${state.position} ${state.direction}"
 
-    fun pos(): String = positionString
+    fun showPosition(): String = positionString
 
     constructor() : this("")
 

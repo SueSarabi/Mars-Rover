@@ -20,3 +20,4 @@
     . Update RoverState using position [X]
     . Remove xx,yy from RoverState [X]
     . Rename dd to direction [X]
+    . Rename pos to showPosition [X]
