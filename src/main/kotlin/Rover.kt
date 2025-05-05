@@ -35,7 +35,6 @@ class Rover {
     private var state = RoverState()
 }
 
-
 class RoverState {
     var position: Position = Position(0, 0)
     var direction: Direction = Direction.N
