@@ -27,10 +27,6 @@ class Rover {
         }
     }
 
-    fun g(z: Char) {
-        go(z.toString())
-    }
-
     val positionString: String
         get() = "${state.position} ${state.direction}"
 
