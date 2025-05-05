@@ -11,15 +11,19 @@ class Rover {
         }
     }
 
+    private fun processCommand(command: Char) {
+        when (command) {
+            'L' -> state.direction = state.direction.left()
+
+            'R' -> state.direction = state.direction.right()
+
+            'M' -> state.moveForward()
+        }
+    }
+
     fun go(commands: String) {
         for (command in commands) {
-            when (command) {
-                'L' -> state.direction = state.direction.left()
-
-                'R' -> state.direction = state.direction.right()
-
-                'M' -> state.moveForward()
-            }
+            processCommand(command)
         }
     }
 

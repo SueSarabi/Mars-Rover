@@ -21,3 +21,6 @@
     . Remove xx,yy from RoverState [X]
     . Rename dd to direction [X]
     . Rename pos to showPosition [X]
++  Create processCommand function [X]
+    . Remove g function [X]
+    . Replace conditionals with when [X]
