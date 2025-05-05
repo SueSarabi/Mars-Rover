@@ -36,3 +36,15 @@ build/
 
 ### Mac OS ###
 .DS_Store
+# Kotlin build output
+/out/
+build/
+*.class
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+
+# OS & editor noise
+.DS_Store
+*.log
