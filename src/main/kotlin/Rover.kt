@@ -17,13 +17,7 @@ class Rover {
 
                 'R' -> state.dd = state.dd.right()
 
-                'M' ->
-                    when (state.dd) {
-                        Direction.E -> state.xx++
-                        Direction.S -> state.yy--
-                        Direction.W -> state.xx--
-                        Direction.N -> state.yy++
-                    }
+                'M' -> state.roverMovement()
             }
         }
     }
@@ -43,6 +37,14 @@ class Rover {
 }
 
 class RoverState {
+    fun roverMovement(){
+        when (dd) {
+            Direction.E -> xx++
+            Direction.S -> yy--
+            Direction.W -> xx--
+            Direction.N -> yy++
+        }
+    }
     var xx: Int = 0
     var yy: Int = 0
     var dd: Direction = Direction.N
