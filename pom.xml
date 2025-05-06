@@ -96,6 +96,11 @@
                         <goals><goal>report</goal></goals>
                         <configuration>
                             <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
+                            <output>file</output>
+                            <formats>
+                                <format>HTML</format>
+                                <format>XML</format>
+                            </formats>
                         </configuration>
                     </execution>
                     <execution>
@@ -141,5 +146,6 @@
         </dependency>
     </dependencies>
 </project>
+
 
 
