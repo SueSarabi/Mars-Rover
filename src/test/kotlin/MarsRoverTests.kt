@@ -1,3 +1,4 @@
+import org.example.Position
 import org.example.Rover
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -38,5 +39,25 @@ class MarsRoverTests(
         val rover = Rover(startingPosition)
         rover.go(instructions)
         assertEquals(expectedOutput, rover.showPosition())
+    }
+
+    @Test
+    fun `access x and y values`() {
+        val position = Position(3, 5)
+        assertEquals(3, position.x)
+        assertEquals(5, position.y)
+    }
+
+    @Test
+    fun `handles input with missing position parts`() {
+        val rover = Rover("1 2")
+        assertEquals("0 0 N", rover.showPosition())
+    }
+
+    @Test
+    fun `ignores invalid command`() {
+        val rover = Rover("1 2 N")
+        rover.go("X")
+        assertEquals("1 2 N", rover.showPosition())
     }
 }
