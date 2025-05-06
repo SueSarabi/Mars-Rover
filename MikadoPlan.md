@@ -1,6 +1,8 @@
 
+## Quality Status
 ![Coverage](https://sonarcloud.io/api/project_badges/measure?project=SueSarabi_Mars-Rover&metric=coverage)
 ![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=SueSarabi_Mars-Rover&metric=alert_status)
+
 
 > This document tracks the Mikado refactoring process for the Mars Rover Kata...
 
