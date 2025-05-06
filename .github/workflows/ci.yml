@@ -60,6 +60,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Generate JaCoCo report
+        run: mvn verify
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v5.1.0
         with:
@@ -67,5 +76,7 @@ jobs:
             -Dsonar.projectKey=SueSarabi_Mars-Rover
             -Dsonar.organization=suesarabi
             -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
